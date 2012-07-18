@@ -1,0 +1,147 @@
+package hangul
+
+// Hangul Compatibility Jamo. Range: 3130-318F
+const (
+	_  = 0x3130 + iota
+	G  // HANGUL LETTER KIYEO
+	GG // HANGUL LETTER SSANGKIYEOK
+	GS
+	N
+	NJ
+	NH
+	D
+	DD
+	L
+	LG
+	LM
+	LB
+	LS
+	LT
+	LP
+	LH
+	M
+	B
+	BB
+	BS
+	S
+	SS
+	ZS // HANGUL LETTER IEUNG (zero sound)
+	J
+	JJ
+	C
+	K
+	T
+	P
+	H
+	A
+	AE
+	YA
+	YAE
+	EO
+	E
+	YEO
+	YE
+	O
+	WA
+	WAE
+	OE
+	YO
+	U
+	WEO
+	WE
+	WI
+	YU
+	EU
+	YI
+	I
+)
+
+// Hangul Jamo. Range 1100-11FF
+const (
+	LEAD_BASE   = 0x1100
+	MEDIAL_BASE = 0x1161
+	TAIL_BASE   = 0x11A8
+)
+
+// Initial consonants 초성
+const (
+	LEAD_G = LEAD_BASE + iota
+	LEAD_GG
+	LEAD_N
+	LEAD_D
+	LEAD_DD
+	LEAD_R
+	LEAD_M
+	LEAD_B
+	LEAD_BB
+	LEAD_S
+	LEAD_SS
+	LEAD_ZS /* zero sound */
+	LEAD_J
+	LEAD_JJ
+	LEAD_C
+	LEAD_K
+	LEAD_T
+	LEAD_P
+	LEAD_H
+)
+const MAX_LEAD_IDX = LEAD_H - LEAD_G
+
+// Medial vowels 중성
+const (
+	MEDIAL_A = MEDIAL_BASE + iota
+	MEDIAL_AE
+	MEDIAL_YA
+	MEDIAL_YAE
+	MEDIAL_EO
+	MEDIAL_E
+	MEDIAL_YEO
+	MEDIAL_YE
+	MEDIAL_O
+	MEDIAL_WA
+	MEDIAL_WAE
+	MEDIAL_OE
+	MEDIAL_YO
+	MEDIAL_U
+	MEDIAL_WEO
+	MEDIAL_WE
+	MEDIAL_WI
+	MEDIAL_YU
+	MEDIAL_EU
+	MEDIAL_YI
+	MEDIAL_I
+)
+const MAX_MEDIAL_IDX = MEDIAL_I - MEDIAL_A
+
+// Final consonants 종성
+const (
+	_ = TAIL_BASE + iota
+	TAIL_G
+	TAIL_GG
+	TAIL_GS
+	TAIL_N
+	TAIL_NJ
+	TAIL_NH
+	TAIL_D
+	TAIL_L
+	TAIL_LG
+	TAIL_LM
+	TAIL_LB
+	TAIL_LS
+	TAIL_LT
+	TAIL_LP
+	TAIL_LH
+	TAIL_M
+	TAIL_B
+	TAIL_BS
+	TAIL_S
+	TAIL_SS
+	TAIL_NG
+	TAIL_J
+	TAIL_C
+	TAIL_K
+	TAIL_T
+	TAIL_P
+	TAIL_H
+)
+const MAX_TAIL_IDX = TAIL_H - TAIL_G + 1
