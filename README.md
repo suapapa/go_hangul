@@ -7,11 +7,13 @@
 hangul is a set of handy tools for manipulate korean character which can:
 
 - Convert between jamo and compatibility-jamo.
-- Split a character to it's three consonants.
+- Split a character to it's three elements.
+- Stroke count of a jamo.
 
 ## TODO
 
-- Stroke count.
+- Romanize.
+- Lexycal Analize.
 
 
 # Documentation

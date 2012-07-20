@@ -14,6 +14,18 @@ import (
 	"testing"
 )
 
+func TestStroke(t *testing.T) {
+	if c := Stroke(JJ); c != 6 {
+		t.Errorf("Unexpected count %d for JJ", c)
+	}
+	if c := Stroke(YAE); c != 4 {
+		t.Errorf("Unexpected count %d for YAE", c)
+	}
+	if c := Stroke(WAE); c != 5 {
+		t.Errorf("Unexpected count %d for WAE", c)
+	}
+}
+
 func TestJoin(t *testing.T) {
 	if c := Join(LEAD_S, MEDIAL_EO, 0); c != 0xC11C {
 		t.Errorf("Got %v, expect %v", c, 0xC11C) // 서
