@@ -4,6 +4,8 @@
 
 # About hangul
 
+![logo](https://lh5.googleusercontent.com/-yblxhHfOiXw/UAzP9_3B0FI/AAAAAAAAA74/0nKCplLb9Ck/s615/IMG_20120723_131321-1.jpg)
+
 hangul is a set of handy tools for manipulate korean character which can:
 
 - Convert between jamo and compatibility-jamo.
