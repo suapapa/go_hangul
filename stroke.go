@@ -32,8 +32,16 @@ var strokes = map[rune]int{
 }
 
 // Get stroke count of jamo.
-func Stroke(jm rune) (c int) {
-	jm = CompatJamo(jm)
+func Stroke(r rune) (c int) {
+	if 0xAC00 <= r && r <= 0xD7A3 {
+		i, m, f := Split(r)
+		c += Stroke(i)
+		c += Stroke(m)
+		c += Stroke(f)
+		return
+	}
+
+	jm := CompatJamo(r)
 	if es, ok := SplitMultiElement(jm); ok {
 		for _, e := range es {
 			c += strokes[e]

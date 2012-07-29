@@ -11,6 +11,7 @@ package hangul
  */
 
 import (
+	//"fmt"
 	"testing"
 )
 
@@ -42,31 +43,34 @@ func TestJoin(t *testing.T) {
 }
 
 func TestSplit(t *testing.T) {
-	var i, m, f rune
+	type hangul struct {
+		i, m, f rune
+	}
 
-	i, m, f = Split(0xC790) // 자
-	if i != LEAD_J || m != MEDIAL_A || f != 0 {
-		t.Errorf("Failed to Split! ")
-		t.Errorf("expected (%v, %v, %v) ", LEAD_J, MEDIAL_A, 0)
-		t.Errorf("but, got (%v, %v, %v)\n", i, m, f)
+	var splitted = []hangul{
+		{J, A, 0},  // 자
+		{M, O, 0},  // 모
+		{H, A, N},  // 한
+		{G, EU, L}, // 글
 	}
-	i, m, f = Split(0xBAA8) // 모
-	if i != LEAD_M || m != MEDIAL_O || f != 0 {
-		t.Errorf("Failed to Split! ")
-		t.Errorf("expected (%v, %v, %v) ", LEAD_M, MEDIAL_O, 0)
-		t.Errorf("but, got (%v, %v, %v)\n", i, m, f)
-	}
-	i, m, f = Split(0xD55C) // 한
-	if i != LEAD_H || m != MEDIAL_A || f != TAIL_N {
-		t.Errorf("Failed to Split! ")
-		t.Errorf("expected (%v, %v, %v) ", LEAD_H, MEDIAL_A, TAIL_N)
-		t.Errorf("but, got (%v, %v, %v)\n", i, m, f)
-	}
-	i, m, f = Split(0xAE00) // 글
-	if i != LEAD_G || m != MEDIAL_EU || f != TAIL_L {
-		t.Errorf("Failed to Split! ")
-		t.Errorf("expected (%v, %v, %v) ", LEAD_G, MEDIAL_EU, TAIL_L)
-		t.Errorf("but, got (%v, %v, %v)\n", i, m, f)
+
+	var idx int
+	for _, c := range "자모한글" {
+		exp := splitted[idx]
+		i, m, f := SplitCompat(c)
+		switch {
+		case i != exp.i:
+			t.Errorf("expected %c, got %", exp.i, i)
+			return
+		case m != exp.m:
+			t.Errorf("expected %c, got %c", exp.m, m)
+			return
+		case f != exp.f:
+			t.Errorf("expected %c, got %c", exp.f, f)
+			return
+
+		}
+		idx += 1
 	}
 }
 

@@ -13,7 +13,7 @@ import (
 // Check Given rune is Hangul
 func IsHangul(r rune) bool {
 	switch {
-	case 44032 <= r && r <= 0xD7A3:
+	case 0xAC00 <= r && r <= 0xD7A3:
 		return true
 	case IsJaeum(r):
 		return true
@@ -55,10 +55,4 @@ func SplitCompat(c rune) (l, m, t rune) {
 	m = CompatJamo(m)
 	t = CompatJamo(t)
 	return
-}
-
-func ConJoin(s *string) {
-}
-
-func DisJoint(s *string) {
 }
