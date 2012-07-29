@@ -50,6 +50,7 @@ var multiElements = map[rune][]rune{
 	SS:  []rune{S, S},
 	JJ:  []rune{J, J},
 	AE:  []rune{A, I},
+	E:   []rune{EO, I},
 	YAE: []rune{YA, I},
 	YE:  []rune{YEO, I},
 	WA:  []rune{O, A},

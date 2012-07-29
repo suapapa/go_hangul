@@ -11,11 +11,19 @@ package hangul
  */
 
 import (
-	//"fmt"
 	"testing"
 )
 
 func TestStroke(t *testing.T) {
+	var i int
+	var ss = []int{5, 5, 3, 0, 4, 5}
+	for _, c := range "세상아 안녕" {
+		if ss[i] != Stroke(c) {
+			t.Errorf("Expected %d got %d", ss[i], Stroke(c))
+		}
+		i += 1
+	}
+
 	if c := Stroke(JJ); c != 6 {
 		t.Errorf("Unexpected count %d for JJ", c)
 	}
