@@ -1,6 +1,6 @@
 
 [install go]: http://golang.org/install.html "Install Go"
-[the godoc url]: http://localhost:6060/pkg/github.com/suapapa/hangul/ "the Godoc URL"
+[the godoc url]: http://localhost:6060/pkg/github.com/suapapa/go_hangul/ "the Godoc URL"
 
 # About hangul
 
@@ -10,7 +10,7 @@ hangul is a set of handy tools for manipulate korean character which can:
 
 - Convert between jamo and compatibility-jamo.
 - Split a character to it's three elements.
-- Stroke count of a jamo.
+- Stroke count.
 
 ## TODO
 
@@ -26,13 +26,13 @@ hangul is a set of handy tools for manipulate korean character which can:
 
 ## Installation
 
-    $ go get github.com/suapapa/hangul
+    $ go get github.com/suapapa/go_hangul
 
 ## General Documentation
 
 Use `go doc` to vew the documentation for hangul
 
-    go doc github.com/suapapa/hangul
+    go doc github.com/suapapa/go_hangul
 
 Or alternatively, use a godoc http server
 
