@@ -2,6 +2,15 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+/*
+  Package hangul provide handy tools for manipulate korean character:
+
+    - Provide shorthands for korean consonants and vowels
+    - Convert between jamo and compatibility-jamo
+    - Split a character to it's three elements
+    - Split multi element
+    - Stroke count
+*/
 package hangul
 
 import (
