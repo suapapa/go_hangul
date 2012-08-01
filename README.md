@@ -6,23 +6,40 @@
 
 ![logo](https://lh5.googleusercontent.com/-yblxhHfOiXw/UAzP9_3B0FI/AAAAAAAAA74/0nKCplLb9Ck/s615/IMG_20120723_131321-1.jpg)
 
-hangul is a set of handy tools for manipulate korean character which can:
+hangul is a set of handy tools for manipulate korean character.
 
-- Convert between jamo and compatibility-jamo.
-- Split a character to it's three elements.
-- Stroke count.
+## Example
 
-## TODO
+    package main
 
-- Romanize.
-- Lexycal Analize.
+    import (
+            "fmt"
+            "github.com/suapapa/go_hangul"
+    )
 
+    func main() {
+            var i, m, f, ci, cm, cf rune
+            var c int
+            for _, r := range "맥도날드" {
+                    // Storke count
+                    c = hangul.Stroke(r)
+                    // Split to three elements
+                    i, m, f = hangul.Split(r)
+                    // Convert between jamo and compatibility-jamo
+                    ci = hangul.CompatJamo(i)
+                    cm = hangul.CompatJamo(m)
+                    cf = hangul.CompatJamo(f)
+
+                    fmt.Printf("%c %d %c(%v) %c(%v) %c(%v)\n", r, c, ci, i, cm, m, cf, f)
+            }
+            fmt.Println("")
+    }
 
 # Documentation
 
 ## Prerequisites
 
-[Install Go][].
+[Install Go][]
 
 ## Installation
 
