@@ -1,6 +1,5 @@
 
 [install go]: http://golang.org/install.html "Install Go"
-[the godoc url]: http://localhost:6060/pkg/github.com/suapapa/go_hangul/ "the Godoc URL"
 
 # About hangul
 
@@ -51,11 +50,7 @@ Use `go doc` to vew the documentation for hangul
 
     go doc github.com/suapapa/go_hangul
 
-Or alternatively, use a godoc http server
-
-    godoc -http=:6060
-
-and visit [the Godoc URL][]
+Or alternatively, refer [go.pkgdoc.org](http://go.pkgdoc.org/github.com/suapapa/go_hangul)
 
 
 # Author
