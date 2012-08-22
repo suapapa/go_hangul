@@ -39,21 +39,22 @@ func Join(l, m, t rune) rune {
 	l = Lead(l)
 	m = Medial(m)
 	t = Tail(t)
-	c := leadIdx(l)*588 + medialIdx(m)*28 + tailIdx(t) + 44032
+	c := 0xAC00 + (leadIdx(l)*21+medialIdx(m))*28 + tailIdx(t)
 	return rune(c)
 }
 
 // Convert NFC to NFD
 func Split(c rune) (l, m, t rune) {
-	t = (c - 44032) % 28
-	m = ((c - 44032 - t) % 588) / 28
-	l = (c - 44032) / 588
+	t = (c - 0xAC00) % 28
+	m = ((c - 0xAC00 - t) % 588) / 28
+	l = (c - 0xAC00) / 588
 
 	l += LEAD_BASE
 	m += MEDIAL_BASE
 	if t != 0 {
-		t += TAIL_BASE
+		t += TAIL_BASE - 1
 	}
+
 	return
 }
 

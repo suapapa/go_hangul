@@ -222,33 +222,30 @@ func Tail(c rune) rune {
 	return 0
 }
 
-func jamoIdx(r rune, base int) int {
-	if r == 0 {
-		return 0
-	}
-	return int(r) - base
-}
-
 func leadIdx(l rune) int {
-	i := jamoIdx(l, LEAD_BASE)
-	if i > MAX_LEAD_IDX {
+	i := int(l) - LEAD_BASE
+	if 0 > i || i > MAX_LEAD_IDX {
 		log.Fatalln("given %v isn't right lead character", l)
 	}
 	return i
 }
 
 func medialIdx(v rune) int {
-	i := jamoIdx(v, MEDIAL_BASE)
-	if i > MAX_MEDIAL_IDX {
+	i := int(v) - MEDIAL_BASE
+	if 0 > i || i > MAX_MEDIAL_IDX {
 		log.Fatalln("given %v isn't right lead character", v)
 	}
 	return i
 }
 
 func tailIdx(t rune) int {
-	i := jamoIdx(t, TAIL_BASE)
-	if i > MAX_TAIL_IDX {
+	if t == 0 {
+		// A hangul syllable cat have no tail consonent.
+		return 0
+	}
+	i := int(t) - TAIL_BASE
+	if 0 > i || i > MAX_TAIL_IDX {
 		log.Fatalln("given %v isn't right lead character", t)
 	}
-	return i
+	return i + 1
 }

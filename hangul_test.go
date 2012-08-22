@@ -14,12 +14,18 @@ import (
 	"testing"
 )
 
+func TestIdx(t *testing.T) {
+	if leadIdx(Lead(T)) != 16 {
+		t.Errorf("Got %v, expect %v", leadIdx(Lead(T)), 16) // 양
+	}
+}
+
 func TestStroke(t *testing.T) {
 	var i int
 	var ss = []int{5, 5, 3, 0, 4, 5}
 	for _, c := range "세상아 안녕" {
 		if ss[i] != Stroke(c) {
-			t.Errorf("Expected %d got %d", ss[i], Stroke(c))
+			t.Errorf("%c Expected %d got %d", c, ss[i], Stroke(c))
 		}
 		i += 1
 	}
@@ -37,16 +43,16 @@ func TestStroke(t *testing.T) {
 
 func TestJoin(t *testing.T) {
 	if c := Join(LEAD_S, MEDIAL_EO, 0); c != 0xC11C {
-		t.Errorf("Got %v, expect %v", c, 0xC11C) // 서
+		t.Errorf("Got %c(%v), expect %c(%v)", c, c, 0xC11C, 0xC11C) // 서
 	}
 	if c := Join(LEAD_ZS, MEDIAL_U, TAIL_L); c != 0xC6B8 {
-		t.Errorf("Got %v, expect %v", c, 0xC6B8) // 울
+		t.Errorf("Got %c, expect %c", c, 0xC6B8) // 울
 	}
 	if c := Join(LEAD_P, MEDIAL_YEO, TAIL_NG); c != 0xD3C9 {
-		t.Errorf("Got %v, expect %v", c, 0xD3C9) // 평
+		t.Errorf("Got %c, expect %c", c, 0xD3C9) // 평
 	}
 	if c := Join(LEAD_ZS, MEDIAL_YA, TAIL_NG); c != 0xC591 {
-		t.Errorf("Got %v, expect %v", c, 0xC11C) // 양
+		t.Errorf("Got %c, expect %c", c, 0xC11C) // 양
 	}
 }
 
@@ -56,25 +62,27 @@ func TestSplit(t *testing.T) {
 	}
 
 	var splitted = []hangul{
-		{J, A, 0},  // 자
-		{M, O, 0},  // 모
-		{H, A, N},  // 한
-		{G, EU, L}, // 글
+		{J, A, 0},    // 자
+		{M, O, 0},    // 모
+		{H, A, N},    // 한
+		{G, EU, L},   // 글
+		{ZS, A, N},   // 안
+		{N, YEO, ZS}, // 녕
 	}
 
 	var idx int
-	for _, c := range "자모한글" {
+	for _, c := range "자모한글안녕" {
 		exp := splitted[idx]
 		i, m, f := SplitCompat(c)
 		switch {
 		case i != exp.i:
-			t.Errorf("expected %c, got %", exp.i, i)
+			t.Errorf("%c-l: expected %c, got %", c, exp.i, i)
 			return
 		case m != exp.m:
-			t.Errorf("expected %c, got %c", exp.m, m)
+			t.Errorf("%c-m: expected %c, got %c", c, exp.m, m)
 			return
 		case f != exp.f:
-			t.Errorf("expected %c, got %c", exp.f, f)
+			t.Errorf("%c-t: expected %c, got %c", c, exp.f, f)
 			return
 
 		}
@@ -139,7 +147,7 @@ func TestJamoConstants(t *testing.T) {
 			" not 0x%04x\n", MEDIAL_I)
 	}
 
-	if TAIL_H != 0x11C3 {
+	if TAIL_H != 0x11C2 {
 		t.Errorf("Last Tail sholud be 0x11C3."+
 			" not 0x%04x\n", TAIL_H)
 	}
