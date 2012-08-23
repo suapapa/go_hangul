@@ -54,6 +54,7 @@ const (
 	EU  // HANGUL LETTER EU
 	YI  // HANGUL LETTER YI
 	I   // HANGUL LETTER I
+	NG  = ZS
 )
 
 // Hangul Jamo. Range 1100-11FF
