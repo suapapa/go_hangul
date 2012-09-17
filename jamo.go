@@ -64,6 +64,7 @@ var multiElements = map[rune][]rune{
 
 // Split multi-element compatibility jamo
 func SplitMultiElement(r rune) ([]rune, bool) {
+	r = CompatJamo(r)
 	es, ok := multiElements[r]
 	return es, ok
 }
