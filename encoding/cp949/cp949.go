@@ -10,9 +10,10 @@ import (
 
 var (
 	fromLookupMutex sync.Mutex
-	toLookupMutex   sync.Mutex
 	fromLookupTable cp949Table
-	toLookupTable   cp949Table
+
+	toLookupMutex sync.Mutex
+	toLookupTable cp949Table
 )
 
 // code pair for a Korean chracter
@@ -137,7 +138,7 @@ func loadCp949Table() (cp949Table, error) {
 	var datInfo struct {
 		CodeCnt, ChunkCnt uint16
 	}
-	if err = binary.Read(buf, binary.BigEndian, &datInfo); err != nil {
+	if err := binary.Read(buf, binary.BigEndian, &datInfo); err != nil {
 		return nil, err
 	}
 
@@ -148,7 +149,7 @@ func loadCp949Table() (cp949Table, error) {
 		Code, Len uint16
 	}
 	for i := uint16(0); i < datInfo.ChunkCnt; i++ {
-		if err = binary.Read(buf, binary.BigEndian, &chunk); err != nil {
+		if err := binary.Read(buf, binary.BigEndian, &chunk); err != nil {
 			return nil, err
 		}
 
@@ -188,8 +189,8 @@ func loadFromCp949LookupTable() (cp949Table, error) {
 }
 
 func loadToCp949LookupTable() (cp949Table, error) {
-	toLookupTable.Lock()
-	defer toLookupTable.Unlock()
+	toLookupMutex.Lock()
+	defer toLookupMutex.Unlock()
 
 	if toLookupTable != nil {
 		return toLookupTable, nil
@@ -203,7 +204,7 @@ func loadToCp949LookupTable() (cp949Table, error) {
 	return toLookupTable, nil
 }
 
-func fromCp959() (translator, error) {
+func fromCp949() (translator, error) {
 	t, err := loadFromCp949LookupTable()
 	if err != nil {
 		return nil, err
@@ -217,4 +218,40 @@ func toCp949() (translator, error) {
 		return nil, err
 	}
 	return &translateToCp949{table: t}, nil
+}
+
+// ensureCap returns s with a capacity of at least n bytes.
+// If cap(s) < n, then it returns a new copy of s with the
+// required capacity.
+func ensureCap(s []byte, n int) []byte {
+	if n <= cap(s) {
+		return s
+	}
+	// logic adapted from appendslice1 in runtime
+	m := cap(s)
+	if m == 0 {
+		m = n
+	} else {
+		for {
+			if m < 1024 {
+				m += m
+			} else {
+				m += m / 4
+			}
+			if m >= n {
+				break
+			}
+		}
+	}
+	t := make([]byte, len(s), m)
+	copy(t, s)
+	return t
+}
+
+// XXX: can it be simpler?
+func appendRune(buf []byte, r rune) []byte {
+	n := len(buf)
+	buf = ensureCap(buf, n+utf8.UTFMax)
+	nu := utf8.EncodeRune(buf[n:n+utf8.UTFMax], r)
+	return buf[0 : n+nu]
 }

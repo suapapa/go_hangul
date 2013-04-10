@@ -1,4 +1,4 @@
-package charset_test
+package cp949
 
 import (
 	"bytes"
