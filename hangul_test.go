@@ -67,7 +67,7 @@ func TestSplit(t *testing.T) {
 		{H, A, N},    // 한
 		{G, EU, L},   // 글
 		{ZS, A, N},   // 안
-		{N, YEO, ZS}, // 녕
+		{N, YEO, NG}, // 녕
 	}
 
 	var idx int
