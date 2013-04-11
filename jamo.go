@@ -8,14 +8,38 @@ import (
 	"log"
 )
 
+// Check Given rune is Lead consonant
+func IsLead(r rune) bool {
+	if LEAD_G <= r && r <= LEAD_H {
+		return true
+	}
+	return false
+}
+
+// Check Given rune is Medial vowel
+func IsMedial(r rune) bool {
+	if MEDIAL_A <= r && r <= MEDIAL_I {
+		return true
+	}
+	return false
+}
+
+// Check Given rune is Tail consonant
+func IsTail(r rune) bool {
+	if TAIL_G <= r && r <= TAIL_H {
+		return true
+	}
+	return false
+}
+
 // Check Given rune is Hangul Jaeum
 func IsJaeum(r rune) bool {
 	switch {
 	case G <= r && r <= H:
 		return true
-	case LEAD_G <= r && r <= LEAD_H:
+	case IsLead(r):
 		return true
-	case TAIL_G <= r && r <= TAIL_H:
+	case IsTail(r):
 		return true
 	}
 	return false
@@ -26,7 +50,7 @@ func IsMoeum(r rune) bool {
 	switch {
 	case A <= r && r <= I:
 		return true
-	case MEDIAL_A <= r && r <= MEDIAL_I:
+	case IsMedial(r):
 		return true
 	}
 	return false
