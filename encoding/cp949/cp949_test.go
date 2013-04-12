@@ -2,6 +2,7 @@ package cp949
 
 import (
 	"bytes"
+	"sort"
 	"testing"
 )
 
@@ -59,4 +60,36 @@ func TestTo(t *testing.T) {
 			t.Errorf("\nexpect\t%v but,\ngot\t%v", expect, got)
 		}
 	}
+}
+
+func (t lookupTable) Len() int {
+	return len(t)
+}
+
+func (t lookupTable) Swap(i, j int) {
+	t[i], t[j] = t[j], t[i]
+}
+
+type lookupTableSortByCp949 struct{ lookupTable }
+
+func (t lookupTableSortByCp949) Less(i, j int) bool {
+	return t.lookupTable[i].cp949 < t.lookupTable[j].cp949
+}
+
+type lookupTableSortByUcs2 struct{ lookupTable }
+
+func (t lookupTableSortByUcs2) Less(i, j int) bool {
+	return t.lookupTable[i].ucs2 < t.lookupTable[j].ucs2
+}
+
+func TestLookupTableSorted(t *testing.T) {
+	if !sort.IsSorted(lookupTableSortByCp949{fromTable}) {
+		t.Error("fromTable is not sorted!")
+	}
+	t.Log("fromTable is sorted")
+
+	if !sort.IsSorted(lookupTableSortByUcs2{toTable}) {
+		t.Error("toTable is not sorted!")
+	}
+	t.Log("toTable is sorted")
 }
