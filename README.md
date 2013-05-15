@@ -5,6 +5,7 @@
 
 ![logo](https://lh5.googleusercontent.com/-yblxhHfOiXw/UAzP9_3B0FI/AAAAAAAAA74/0nKCplLb9Ck/s615/IMG_20120723_131321-1.jpg)
 
+
 hangul is a set of handy tools for manipulate korean character.
 
 ## Example
@@ -63,3 +64,5 @@ Copyright (c) 2012, Homin Lee.
 All rights reserved.
 Use of this source code is governed by a BSD-style license that can be
 found in the LICENSE file.
+
+[![Build Status](https://travis-ci.org/suapapa/go_hangul.png?branch=master)](https://travis-ci.org/suapapa/go_hangul)
