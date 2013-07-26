@@ -8,7 +8,7 @@ import (
 	"io"
 )
 
-// convert utf-8 stream to cp949 stream
+// convert cp949 stream to utf-8 stream
 func From(in []byte) ([]byte, error) {
 	tr, err := fromCp949()
 	if err != nil {
@@ -23,7 +23,7 @@ func From(in []byte) ([]byte, error) {
 	return out, nil
 }
 
-// convert cp949 stream to utf-8 stream
+// convert utf-8 stream to cp949 stream
 func To(in []byte) ([]byte, error) {
 	tr, err := toCp949()
 	if err != nil {
