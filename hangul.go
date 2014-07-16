@@ -13,12 +13,6 @@
 */
 package hangul
 
-import (
-//	"log"
-//	"unicode"
-//	"unicode/utf16"
-)
-
 // Check Given rune is Hangul
 func IsHangul(r rune) bool {
 	switch {
@@ -36,11 +30,22 @@ func IsHangul(r rune) bool {
 // Convert NFD to NFC
 func Join(l, m, t rune) rune {
 	// Convert if given rune is compatibility jamo
-	l = Lead(l)
-	m = Medial(m)
-	t = Tail(t)
-	c := 0xAC00 + (leadIdx(l)*21+medialIdx(m))*28 + tailIdx(t)
-	return rune(c)
+	li, ok := leadIdx(Lead(l))
+	if !ok {
+		return rune(0xFFFD)
+	}
+
+	mi, ok := medialIdx(Medial(m))
+	if !ok {
+		return rune(0xFFFD)
+	}
+
+	ti, ok := tailIdx(Tail(t))
+	if !ok {
+		return rune(0xFFFD)
+	}
+
+	return rune(0xAC00 + (li*21+mi)*28 + ti)
 }
 
 // Convert NFC to NFD

@@ -4,10 +4,6 @@
 
 package hangul
 
-import (
-	"log"
-)
-
 // Check Given rune is Lead consonant
 func IsLead(r rune) bool {
 	if LEAD_G <= r && r <= LEAD_H {
@@ -247,30 +243,30 @@ func Tail(c rune) rune {
 	return 0
 }
 
-func leadIdx(l rune) int {
+func leadIdx(l rune) (int, bool) {
 	i := int(l) - LEAD_BASE
 	if 0 > i || i > MAX_LEAD_IDX {
-		log.Fatalln("given %v isn't right lead character", l)
+		return 0, false
 	}
-	return i
+	return i, true
 }
 
-func medialIdx(v rune) int {
+func medialIdx(v rune) (int, bool) {
 	i := int(v) - MEDIAL_BASE
 	if 0 > i || i > MAX_MEDIAL_IDX {
-		log.Fatalln("given %v isn't right lead character", v)
+		return 0, false
 	}
-	return i
+	return i, true
 }
 
-func tailIdx(t rune) int {
+func tailIdx(t rune) (int, bool) {
 	if t == 0 {
-		// A hangul syllable cat have no tail consonent.
-		return 0
+		// A hangul syllable can have no tail consonent.
+		return 0, true
 	}
 	i := int(t) - TAIL_BASE
 	if 0 > i || i > MAX_TAIL_IDX {
-		log.Fatalln("given %v isn't right lead character", t)
+		return 0, false
 	}
-	return i + 1
+	return i + 1, true
 }

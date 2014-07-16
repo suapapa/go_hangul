@@ -10,13 +10,11 @@ package hangul
  *  Description: Main test file for hangul
  */
 
-import (
-	"testing"
-)
+import "testing"
 
 func TestIdx(t *testing.T) {
-	if leadIdx(Lead(T)) != 16 {
-		t.Errorf("Got %v, expect %v", leadIdx(Lead(T)), 16) // 양
+	if li, ok := leadIdx(Lead(T)); !ok || li != 16 {
+		t.Errorf("Got %v, expect %v", li, 16) // 양
 	}
 }
 
