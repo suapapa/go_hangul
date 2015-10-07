@@ -38,7 +38,7 @@ func (p *translateFromCp949) Translate(data []byte) (int, []byte, error) {
 		if data[0]&0x80 == 0 {
 			p.scratch = append(p.scratch, data[0])
 			data = data[1:]
-			c += 1
+			c++
 			continue
 		}
 
@@ -76,7 +76,7 @@ func (p *translateToCp949) Translate(data []byte) (int, []byte, error) {
 		if data[0]&0x80 == 0 {
 			p.scratch = append(p.scratch, data[0])
 			data = data[1:]
-			c += 1
+			c++
 			continue
 		}
 

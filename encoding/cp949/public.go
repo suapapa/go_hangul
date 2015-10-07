@@ -1,4 +1,4 @@
-// Copyright 2013, Homin Lee. All rights reserved.
+// Copyright 2013-2015, Homin Lee. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -8,7 +8,7 @@ import (
 	"io"
 )
 
-// convert cp949 stream to utf-8 stream
+// From converts cp949 stream to utf-8 stream
 func From(in []byte) ([]byte, error) {
 	tr, err := fromCp949()
 	if err != nil {
@@ -23,7 +23,7 @@ func From(in []byte) ([]byte, error) {
 	return out, nil
 }
 
-// convert utf-8 stream to cp949 stream
+// To converts utf-8 stream to cp949 stream
 func To(in []byte) ([]byte, error) {
 	tr, err := toCp949()
 	if err != nil {
@@ -46,7 +46,7 @@ type cp949Reader struct {
 	err   error  // final error from reader.
 }
 
-// create io.Reader which read cp949 source to utf-8
+// NewReader creates io.Reader which read cp949 source to utf-8
 func NewReader(r io.Reader) (io.Reader, error) {
 	tr, err := fromCp949()
 	if err != nil {
@@ -99,7 +99,7 @@ type cp949Writer struct {
 	buf []byte // unconsumed data from writer.
 }
 
-// creater io.Writer which write utf8 input src to cp949
+// NewWriter creaters io.Writer which write utf8 input src to cp949
 func NewWriter(w io.Writer) (io.Writer, error) {
 	tr, err := toCp949()
 	if err != nil {
