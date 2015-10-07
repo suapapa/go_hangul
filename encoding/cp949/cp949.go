@@ -1,4 +1,4 @@
-// Copyright 2013, Homin Lee. All rights reserved.
+// Copyright 2013-2015, Homin Lee. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -40,6 +40,10 @@ func (p *translateFromCp949) Translate(data []byte) (int, []byte, error) {
 			data = data[1:]
 			c += 1
 			continue
+		}
+
+		if len(data) < 2 {
+			return 0, nil, ErrCP949UnexpectedStream
 		}
 
 		n := uint16(data[0])<<8 | uint16(data[1])

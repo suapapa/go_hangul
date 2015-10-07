@@ -1,4 +1,4 @@
-// Copyright 2013, Homin Lee. All rights reserved.
+// Copyright 2013-2015, Homin Lee. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -12,6 +12,11 @@ import (
 
 type cp949Test struct {
 	cp949, utf8 string
+}
+
+type cp949FailTest struct {
+	cp949, utf8 string
+	err         error
 }
 
 var tests = []cp949Test{
@@ -62,6 +67,23 @@ func TestTo(t *testing.T) {
 		}
 		if 0 != bytes.Compare(got, expect) {
 			t.Errorf("\nexpect\t%v but,\ngot\t%v", expect, got)
+		}
+	}
+}
+
+var failtests = []cp949FailTest{
+	cp949FailTest{
+		cp949: "\xa8",
+		utf8:  "",
+		err:   ErrCP949UnexpectedStream,
+	},
+}
+
+func TestError(t *testing.T) {
+	for _, failtest := range failtests {
+		_, err := From([]byte(failtest.cp949))
+		if err != failtest.err {
+			t.Error("got unexpected error:", err)
 		}
 	}
 }
