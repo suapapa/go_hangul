@@ -33,6 +33,15 @@ hangul is a set of handy tools for manipulate korean character.
                     fmt.Printf("%c %d %c(%v) %c(%v) %c(%v)\n", r, c, ci, i, cm, m, cf, f)
             }
             fmt.Println("")
+
+            fmt.Println(
+                hangul.EndsWithConsonant("강")) // true
+            fmt.Println(
+                hangul.EndsWithConsonant("그")) // false
+            fmt.Println(
+                hangul.AppendPostposition("강", "이", "가")) // "강이"
+            fmt.Println(
+                hangul.AppendPostposition("물고기", "은", "는")) // "물고기는"
     }
 
 # Documentation
