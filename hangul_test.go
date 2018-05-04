@@ -74,7 +74,7 @@ func TestSplit(t *testing.T) {
 		i, m, f := SplitCompat(c)
 		switch {
 		case i != exp.i:
-			t.Errorf("%c-l: expected %c, got %", c, exp.i, i)
+			t.Errorf("%c-l: expected %c, got %c", c, exp.i, i)
 			return
 		case m != exp.m:
 			t.Errorf("%c-m: expected %c, got %c", c, exp.m, m)
@@ -148,5 +148,53 @@ func TestJamoConstants(t *testing.T) {
 	if TAIL_H != 0x11C2 {
 		t.Errorf("Last Tail sholud be 0x11C3."+
 			" not 0x%04x\n", TAIL_H)
+	}
+}
+
+func TestEndsWithConsonant(t *testing.T) {
+	cases := []struct {
+		word     string
+		endsWith bool
+	}{
+		{"", false},
+		{"강", true},
+		{"그날맑", true},
+		{"이", false},
+		{"물고기", false},
+	}
+	for _, c := range cases {
+		if EndsWithConsonant(c.word) != c.endsWith {
+			if c.endsWith {
+				t.Errorf("'%s' should be ends with consonant",
+					c.word)
+			} else {
+				t.Errorf("'%s' should not be ends with consonant",
+					c.word)
+			}
+		}
+	}
+}
+
+func TestAppendPostposition(t *testing.T) {
+	cases := []struct {
+		word     string
+		with     string
+		without  string
+		expected string
+	}{
+		{"", "", "", ""},
+		{"", "이", "가", "가"},
+		{"칸", "은", "는", "칸은"},
+		{"그", "은", "는", "그는"},
+		{"그날맑", "이", "가", "그날맑이"},
+		{"스무디", "을", "를", "스무디를"},
+		{"영철", "이랑", "랑", "영철이랑"},
+		{"순희", "이랑", "랑", "순희랑"},
+	}
+	for _, c := range cases {
+		actual := AppendPostposition(c.word, c.with, c.without)
+		if actual != c.expected {
+			t.Errorf("'%s' should be '%s'", actual, c.expected)
+		}
 	}
 }

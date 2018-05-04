@@ -71,3 +71,43 @@ func SplitCompat(c rune) (l, m, t rune) {
 	t = CompatJamo(t)
 	return
 }
+
+// EndsWithConsonant returns true if the given word ends with
+// consonant(종성), false otherwise.
+//
+// ```
+// a := hangul.EndsWithConsonant("강")
+// // a = true
+// b := hangul.EndsWithConsonant("물고기")
+// // b = false
+// ```
+func EndsWithConsonant(word string) bool {
+	if word == "" {
+		return false
+	}
+	runes := []rune(word)
+	t := (runes[len(runes)-1] - 0xAC00) % 28
+	return t != 0
+}
+
+// AppendPostposition returns word with postposition(조사).
+// The 'with' will be appended to a word that ends with consonant, and
+// the 'without' will be appended to a word that does not end with
+// consonant.
+//
+// ```
+// a := hangul.AppendPostposition("강", "이", "가")
+// // a = "강이"
+// b := hangul.AppendPostposition("물고기", "은", "는")
+// // b = "물고기는"
+// c := hangul.AppendPostposition("영철", "이랑", "랑")
+// // c = "영철이랑"
+// d := hangul.AppendPostposition("순희", "이랑", "랑")
+// // d = "순희랑"
+// ```
+func AppendPostposition(word, with, without string) string {
+	if EndsWithConsonant(word) {
+		return word + with
+	}
+	return word + without
+}
