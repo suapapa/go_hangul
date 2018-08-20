@@ -72,6 +72,19 @@ func SplitCompat(c rune) (l, m, t rune) {
 	return
 }
 
+// EndsWithConsonant returns true if the given word ends with
+// consonant(종성), false otherwise.
+//
+// ```
+// a := hangul.EndsWithConsonant("강")
+// // a = true
+// b := hangul.EndsWithConsonant("물고기")
+// // b = false
+// ```
+func EndsWithConsonant(word string) bool {
+	return LastConsonant(word) != 0
+}
+
 // LastConsonant returns true if the given word ends with
 // consonant(종성), false otherwise.
 //
