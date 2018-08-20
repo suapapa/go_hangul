@@ -2,18 +2,15 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-/*
-  Package hangul provide handy tools for manipulate korean character:
-
-    - Provide shorthands for korean consonants and vowels
-    - Convert between jamo and compatibility-jamo
-    - Split a character to it's three elements
-    - Split multi element
-    - Stroke count
-*/
+// Package hangul provide handy tools for manipulate korean character:
+//    - Provide shorthands for korean consonants and vowels
+//    - Convert between jamo and compatibility-jamo
+//    - Split a character to it's three elements
+//    - Split multi element
+//    - Stroke count
 package hangul
 
-// Check Given rune is Hangul
+// IsHangul checks given rune is Hangul
 func IsHangul(r rune) bool {
 	switch {
 	case 0xAC00 <= r && r <= 0xD7A3:
@@ -27,7 +24,7 @@ func IsHangul(r rune) bool {
 	return false
 }
 
-// Convert NFD to NFC
+// Join converts NFD to NFC
 func Join(l, m, t rune) rune {
 	// Convert if given rune is compatibility jamo
 	li, ok := leadIdx(Lead(l))
@@ -48,7 +45,7 @@ func Join(l, m, t rune) rune {
 	return rune(0xAC00 + (li*21+mi)*28 + ti)
 }
 
-// Convert NFC to NFD
+// Split converts NFC to NFD
 func Split(c rune) (l, m, t rune) {
 	t = (c - 0xAC00) % 28
 	m = ((c - 0xAC00 - t) % 588) / 28
@@ -63,7 +60,7 @@ func Split(c rune) (l, m, t rune) {
 	return
 }
 
-// Split and got l, m, t in compatibility jamo
+// SplitCompat splits and returns l, m, t in compatibility jamo
 func SplitCompat(c rune) (l, m, t rune) {
 	l, m, t = Split(c)
 	l = CompatJamo(l)

@@ -31,7 +31,7 @@ var strokes = map[rune]int{
 	I:   1,
 }
 
-// Get stroke count of jamo.
+// Stroke returns stroke count of given jamo.
 func Stroke(r rune) (c int) {
 	if 0xAC00 <= r && r <= 0xD7A3 {
 		i, m, f := Split(r)

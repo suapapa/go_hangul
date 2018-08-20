@@ -4,7 +4,7 @@
 
 package hangul
 
-// Check Given rune is Lead consonant
+// IsLead checks given rune is lead consonant
 func IsLead(r rune) bool {
 	if LEAD_G <= r && r <= LEAD_H {
 		return true
@@ -12,7 +12,7 @@ func IsLead(r rune) bool {
 	return false
 }
 
-// Check Given rune is Medial vowel
+// IsMedial checks given rune is medial vowel
 func IsMedial(r rune) bool {
 	if MEDIAL_A <= r && r <= MEDIAL_I {
 		return true
@@ -20,7 +20,7 @@ func IsMedial(r rune) bool {
 	return false
 }
 
-// Check Given rune is Tail consonant
+// IsTail checks given rune is tail consonant
 func IsTail(r rune) bool {
 	if TAIL_G <= r && r <= TAIL_H {
 		return true
@@ -28,7 +28,7 @@ func IsTail(r rune) bool {
 	return false
 }
 
-// Check Given rune is Hangul Jaeum
+// IsJaeum checks given rune is Hangul Jaeum
 func IsJaeum(r rune) bool {
 	switch {
 	case G <= r && r <= H:
@@ -41,7 +41,7 @@ func IsJaeum(r rune) bool {
 	return false
 }
 
-// Check Given rune is Hangul Moeum
+// IsMoeum checks given rune is Hangul Moeum
 func IsMoeum(r rune) bool {
 	switch {
 	case A <= r && r <= I:
@@ -82,7 +82,7 @@ var multiElements = map[rune][]rune{
 	YI:  []rune{EU, I},
 }
 
-// Split multi-element compatibility jamo
+// SplitMultiElement splits multi-element compatibility jamo
 func SplitMultiElement(r rune) ([]rune, bool) {
 	r = CompatJamo(r)
 	es, ok := multiElements[r]
@@ -138,7 +138,7 @@ var toCompatJamo = map[rune]rune{
 	TAIL_H:  H,
 }
 
-// Convert lead, medial, tail to compatibility jamo
+// CompatJamo converts lead, medial, tail to compatibility jamo
 func CompatJamo(r rune) rune {
 	switch {
 	case G <= r && r <= H:
@@ -177,7 +177,7 @@ var toLead = map[rune]rune{
 	H:  LEAD_H,
 }
 
-// Convert compatibility jaeum to corresponding lead consonant
+// Lead converts compatibility jaeum to corresponding lead consonant
 func Lead(c rune) rune {
 	if LEAD_G <= c && c <= LEAD_H {
 		return c
@@ -189,7 +189,7 @@ func Lead(c rune) rune {
 	return 0
 }
 
-// Convert compatibility moeum to corresponding medial vowel
+// Medial converts compatibility moeum to corresponding medial vowel
 func Medial(c rune) rune {
 	switch {
 	case MEDIAL_A <= c && c <= MEDIAL_I:
@@ -231,7 +231,7 @@ var toTail = map[rune]rune{
 	H:  TAIL_H,
 }
 
-// Convert compatibility jaeum to corresponding tail consonant
+// Tail converts compatibility jaeum to corresponding tail consonant
 func Tail(c rune) rune {
 	if TAIL_G <= c && c <= TAIL_H {
 		return c

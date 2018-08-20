@@ -25,7 +25,7 @@ func TestStroke(t *testing.T) {
 		if ss[i] != Stroke(c) {
 			t.Errorf("%c Expected %d got %d", c, ss[i], Stroke(c))
 		}
-		i += 1
+		i++
 	}
 
 	if c := Stroke(JJ); c != 6 {
@@ -84,7 +84,7 @@ func TestSplit(t *testing.T) {
 			return
 
 		}
-		idx += 1
+		idx++
 	}
 }
 
