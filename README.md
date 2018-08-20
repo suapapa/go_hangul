@@ -1,12 +1,10 @@
 
-[install go]: http://golang.org/install.html "Install Go"
-
 # About hangul
 
-![logo](https://lh5.googleusercontent.com/-yblxhHfOiXw/UAzP9_3B0FI/AAAAAAAAA74/0nKCplLb9Ck/s615/IMG_20120723_131321-1.jpg)
+hangul is a set of handy tools for manipulate korean character in Go language.
 
-
-hangul is a set of handy tools for manipulate korean character.
+[![GoDoc](https://godoc.org/github.com/suapapa/go_hangul?status.svg)](https://godoc.org/github.com/suapapa/go_hangul)
+[![Build Status](https://travis-ci.org/suapapa/go_hangul.png?branch=master)](https://travis-ci.org/suapapa/go_hangul)
 
 ## Example
 
@@ -14,7 +12,7 @@ hangul is a set of handy tools for manipulate korean character.
 
     import (
             "fmt"
-            "github.com/suapapa/go_hangul"
+            hangul "github.com/suapapa/go_hangul"
     )
 
     func main() {
@@ -44,24 +42,9 @@ hangul is a set of handy tools for manipulate korean character.
                 hangul.AppendPostposition("물고기", "은", "는")) // "물고기는"
     }
 
-# Documentation
-
-## Prerequisites
-
-[Install Go][]
-
-## Installation
+# Installation
 
     $ go get github.com/suapapa/go_hangul
-
-## General Documentation
-
-Use `go doc` to vew the documentation for hangul
-
-    go doc github.com/suapapa/go_hangul
-
-Or alternatively, refer [go.pkgdoc.org](http://go.pkgdoc.org/github.com/suapapa/go_hangul)
-
 
 # Author
 
@@ -73,5 +56,3 @@ Copyright (c) 2012, Homin Lee.
 All rights reserved.
 Use of this source code is governed by a BSD-style license that can be
 found in the LICENSE file.
-
-[![Build Status](https://travis-ci.org/suapapa/go_hangul.png?branch=master)](https://travis-ci.org/suapapa/go_hangul)
