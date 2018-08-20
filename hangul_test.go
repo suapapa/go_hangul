@@ -151,26 +151,20 @@ func TestJamoConstants(t *testing.T) {
 	}
 }
 
-func TestEndsWithConsonant(t *testing.T) {
+func TestLastConsonant(t *testing.T) {
 	cases := []struct {
 		word     string
-		endsWith bool
+		endsWith rune
 	}{
-		{"", false},
-		{"강", true},
-		{"그날맑", true},
-		{"이", false},
-		{"물고기", false},
+		{"", 0},
+		{"강", TAIL_NG},
+		{"그날맑", TAIL_LG},
+		{"이", 0},
+		{"물고기", 0},
 	}
 	for _, c := range cases {
-		if EndsWithConsonant(c.word) != c.endsWith {
-			if c.endsWith {
-				t.Errorf("'%s' should be ends with consonant",
-					c.word)
-			} else {
-				t.Errorf("'%s' should not be ends with consonant",
-					c.word)
-			}
+		if LastConsonant(c.word) != c.endsWith {
+			t.Errorf("'%s' should not be ends with consonant %c", c.word, c.endsWith)
 		}
 	}
 }
