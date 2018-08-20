@@ -190,6 +190,7 @@ func TestAppendPostposition(t *testing.T) {
 		{"스무디", "을", "를", "스무디를"},
 		{"영철", "이랑", "랑", "영철이랑"},
 		{"순희", "이랑", "랑", "순희랑"},
+		{"마을", "으로", "로", "마을로"},
 	}
 	for _, c := range cases {
 		actual := AppendPostposition(c.word, c.with, c.without)
