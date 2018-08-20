@@ -71,13 +71,6 @@ func SplitCompat(c rune) (l, m, t rune) {
 
 // EndsWithConsonant returns true if the given word ends with
 // consonant(종성), false otherwise.
-//
-// ```
-// a := hangul.LastConsonant("강")
-// // a = true
-// b := hangul.LastConsonant("물고기")
-// // b = false
-// ```
 func EndsWithConsonant(word string) bool {
 	if LastConsonant(word) == 0 {
 		return false
@@ -88,13 +81,6 @@ func EndsWithConsonant(word string) bool {
 
 // LastConsonant returns last consonant(종성).
 // It returns 0 if last consonant not exists.
-//
-// ```
-// a := hangul.LastConsonant("강")
-// // a = TAIL_O
-// b := hangul.LastConsonant("물고기")
-// // b = 0
-// ```
 func LastConsonant(word string) rune {
 	if word == "" {
 		return 0
@@ -108,19 +94,6 @@ func LastConsonant(word string) rune {
 // The 'with' will be appended to a word that ends with consonant, and
 // the 'without' will be appended to a word that does not end with
 // consonant.
-//
-// ```
-// a := hangul.AppendPostposition("강", "이", "가")
-// // a = "강이"
-// b := hangul.AppendPostposition("물고기", "은", "는")
-// // b = "물고기는"
-// c := hangul.AppendPostposition("영철", "이랑", "랑")
-// // c = "영철이랑"
-// d := hangul.AppendPostposition("순희", "이랑", "랑")
-// // d = "순희랑"
-// e := hangul.AppendPostposition("마을", "으로", "로")
-// // e = "마을로"
-// ```
 func AppendPostposition(word, with, without string) string {
 	lastTail := LastConsonant(word)
 	if with == "으로" && lastTail == TAIL_L {
