@@ -1,3 +1,4 @@
+![hangul logo](brand/go_hangul.png)
 
 # About hangul
 
