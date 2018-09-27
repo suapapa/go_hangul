@@ -51,10 +51,10 @@ func Split(c rune) (l, m, t rune) {
 	m = ((c - 0xAC00 - t) % 588) / 28
 	l = (c - 0xAC00) / 588
 
-	l += LEAD_BASE
-	m += MEDIAL_BASE
+	l += leadBase
+	m += medialBase
 	if t != 0 {
-		t += TAIL_BASE - 1
+		t += tailBase - 1
 	}
 
 	return
@@ -96,7 +96,7 @@ func LastConsonant(word string) rune {
 // consonant.
 func AppendPostposition(word, with, without string) string {
 	lastTail := LastConsonant(word)
-	if with == "으로" && lastTail == TAIL_L {
+	if with == "으로" && lastTail == TailL {
 		return word + without // 로
 	}
 	if lastTail != 0 {

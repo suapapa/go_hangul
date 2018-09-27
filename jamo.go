@@ -6,7 +6,7 @@ package hangul
 
 // IsLead checks given rune is lead consonant
 func IsLead(r rune) bool {
-	if LEAD_G <= r && r <= LEAD_H {
+	if LeadG <= r && r <= LeadH {
 		return true
 	}
 	return false
@@ -14,7 +14,7 @@ func IsLead(r rune) bool {
 
 // IsMedial checks given rune is medial vowel
 func IsMedial(r rune) bool {
-	if MEDIAL_A <= r && r <= MEDIAL_I {
+	if MedialA <= r && r <= MedialI {
 		return true
 	}
 	return false
@@ -22,7 +22,7 @@ func IsMedial(r rune) bool {
 
 // IsTail checks given rune is tail consonant
 func IsTail(r rune) bool {
-	if TAIL_G <= r && r <= TAIL_H {
+	if TailG <= r && r <= TailH {
 		return true
 	}
 	return false
@@ -90,52 +90,52 @@ func SplitMultiElement(r rune) ([]rune, bool) {
 }
 
 var toCompatJamo = map[rune]rune{
-	LEAD_G:  G,
-	TAIL_G:  G,
-	LEAD_GG: GG,
-	TAIL_GG: GG,
-	TAIL_GS: GS,
-	LEAD_N:  N,
-	TAIL_N:  N,
-	TAIL_NJ: NJ,
-	TAIL_NH: NH,
-	LEAD_D:  D,
-	TAIL_D:  D,
-	LEAD_DD: DD,
-	LEAD_R:  L,
-	TAIL_L:  L,
-	TAIL_LG: LG,
-	TAIL_LM: LM,
-	TAIL_LB: LB,
-	TAIL_LS: LS,
-	TAIL_LT: LT,
-	TAIL_LP: LP,
-	TAIL_LH: LH,
-	LEAD_M:  M,
-	TAIL_M:  M,
-	LEAD_B:  B,
-	TAIL_B:  B,
-	LEAD_BB: BB,
-	TAIL_BS: BS,
-	LEAD_S:  S,
-	TAIL_S:  S,
-	LEAD_SS: SS,
-	TAIL_SS: SS,
-	LEAD_ZS: ZS,
-	TAIL_NG: ZS,
-	LEAD_J:  J,
-	TAIL_J:  J,
-	LEAD_JJ: JJ,
-	LEAD_C:  C,
-	TAIL_C:  C,
-	LEAD_K:  K,
-	TAIL_K:  K,
-	LEAD_T:  T,
-	TAIL_T:  T,
-	LEAD_P:  P,
-	TAIL_P:  P,
-	LEAD_H:  H,
-	TAIL_H:  H,
+	LeadG:  G,
+	TailG:  G,
+	LeadGG: GG,
+	TailGG: GG,
+	TailGS: GS,
+	LeadN:  N,
+	TailN:  N,
+	TailNJ: NJ,
+	TailNH: NH,
+	LeadD:  D,
+	TailD:  D,
+	LeadDD: DD,
+	LeadR:  L,
+	TailL:  L,
+	TailLG: LG,
+	TailLM: LM,
+	TailLB: LB,
+	TailLS: LS,
+	TailLT: LT,
+	TailLP: LP,
+	TailLH: LH,
+	LeadM:  M,
+	TailM:  M,
+	LeadB:  B,
+	TailB:  B,
+	LeadBB: BB,
+	TailBS: BS,
+	LeadS:  S,
+	TailS:  S,
+	LeadSS: SS,
+	TailSS: SS,
+	LeadZS: ZS,
+	TailNG: ZS,
+	LeadJ:  J,
+	TailJ:  J,
+	LeadJJ: JJ,
+	LeadC:  C,
+	TailC:  C,
+	LeadK:  K,
+	TailK:  K,
+	LeadT:  T,
+	TailT:  T,
+	LeadP:  P,
+	TailP:  P,
+	LeadH:  H,
+	TailH:  H,
 }
 
 // CompatJamo converts lead, medial, tail to compatibility jamo
@@ -145,8 +145,8 @@ func CompatJamo(r rune) rune {
 		return r
 	case A <= r && r <= I:
 		return r
-	case MEDIAL_A <= r && r <= MEDIAL_I:
-		return r - MEDIAL_BASE + A
+	case MedialA <= r && r <= MedialI:
+		return r - medialBase + A
 	}
 	if c, ok := toCompatJamo[r]; ok {
 		return c
@@ -156,30 +156,30 @@ func CompatJamo(r rune) rune {
 }
 
 var toLead = map[rune]rune{
-	G:  LEAD_G,
-	GG: LEAD_GG,
-	N:  LEAD_N,
-	D:  LEAD_D,
-	DD: LEAD_DD,
-	L:  LEAD_R,
-	M:  LEAD_M,
-	B:  LEAD_B,
-	BB: LEAD_BB,
-	S:  LEAD_S,
-	SS: LEAD_SS,
-	ZS: LEAD_ZS,
-	J:  LEAD_J,
-	JJ: LEAD_JJ,
-	C:  LEAD_C,
-	K:  LEAD_K,
-	T:  LEAD_T,
-	P:  LEAD_P,
-	H:  LEAD_H,
+	G:  LeadG,
+	GG: LeadGG,
+	N:  LeadN,
+	D:  LeadD,
+	DD: LeadDD,
+	L:  LeadR,
+	M:  LeadM,
+	B:  LeadB,
+	BB: LeadBB,
+	S:  LeadS,
+	SS: LeadSS,
+	ZS: LeadZS,
+	J:  LeadJ,
+	JJ: LeadJJ,
+	C:  LeadC,
+	K:  LeadK,
+	T:  LeadT,
+	P:  LeadP,
+	H:  LeadH,
 }
 
 // Lead converts compatibility jaeum to corresponding lead consonant
 func Lead(c rune) rune {
-	if LEAD_G <= c && c <= LEAD_H {
+	if LeadG <= c && c <= LeadH {
 		return c
 	}
 	if l, ok := toLead[c]; ok {
@@ -192,48 +192,48 @@ func Lead(c rune) rune {
 // Medial converts compatibility moeum to corresponding medial vowel
 func Medial(c rune) rune {
 	switch {
-	case MEDIAL_A <= c && c <= MEDIAL_I:
+	case MedialA <= c && c <= MedialI:
 		return c
 	case A <= c && c <= I:
-		return c - A + MEDIAL_BASE
+		return c - A + medialBase
 	}
 
 	return 0
 }
 
 var toTail = map[rune]rune{
-	G:  TAIL_G,
-	GG: TAIL_GG,
-	GS: TAIL_GS,
-	N:  TAIL_N,
-	NJ: TAIL_NJ,
-	NH: TAIL_NH,
-	D:  TAIL_D,
-	L:  TAIL_L,
-	LG: TAIL_LG,
-	LM: TAIL_LM,
-	LB: TAIL_LB,
-	LS: TAIL_LS,
-	LT: TAIL_LT,
-	LP: TAIL_LP,
-	LH: TAIL_LH,
-	M:  TAIL_M,
-	B:  TAIL_B,
-	BS: TAIL_BS,
-	S:  TAIL_S,
-	SS: TAIL_SS,
-	ZS: TAIL_NG,
-	J:  TAIL_J,
-	C:  TAIL_C,
-	K:  TAIL_K,
-	T:  TAIL_T,
-	P:  TAIL_P,
-	H:  TAIL_H,
+	G:  TailG,
+	GG: TailGG,
+	GS: TailGS,
+	N:  TailN,
+	NJ: TailNJ,
+	NH: TailNH,
+	D:  TailD,
+	L:  TailL,
+	LG: TailLG,
+	LM: TailLM,
+	LB: TailLB,
+	LS: TailLS,
+	LT: TailLT,
+	LP: TailLP,
+	LH: TailLH,
+	M:  TailM,
+	B:  TailB,
+	BS: TailBS,
+	S:  TailS,
+	SS: TailSS,
+	ZS: TailNG,
+	J:  TailJ,
+	C:  TailC,
+	K:  TailK,
+	T:  TailT,
+	P:  TailP,
+	H:  TailH,
 }
 
 // Tail converts compatibility jaeum to corresponding tail consonant
 func Tail(c rune) rune {
-	if TAIL_G <= c && c <= TAIL_H {
+	if TailG <= c && c <= TailH {
 		return c
 	}
 	if t, ok := toTail[c]; ok {
@@ -244,16 +244,16 @@ func Tail(c rune) rune {
 }
 
 func leadIdx(l rune) (int, bool) {
-	i := int(l) - LEAD_BASE
-	if 0 > i || i > MAX_LEAD_IDX {
+	i := int(l) - leadBase
+	if 0 > i || i > maxLeadIdx {
 		return 0, false
 	}
 	return i, true
 }
 
 func medialIdx(v rune) (int, bool) {
-	i := int(v) - MEDIAL_BASE
-	if 0 > i || i > MAX_MEDIAL_IDX {
+	i := int(v) - medialBase
+	if 0 > i || i > maxMedialIdx {
 		return 0, false
 	}
 	return i, true
@@ -264,8 +264,8 @@ func tailIdx(t rune) (int, bool) {
 		// A hangul syllable can have no tail consonent.
 		return 0, true
 	}
-	i := int(t) - TAIL_BASE
-	if 0 > i || i > MAX_TAIL_IDX {
+	i := int(t) - tailBase
+	if 0 > i || i > maxTailIdx {
 		return 0, false
 	}
 	return i + 1, true

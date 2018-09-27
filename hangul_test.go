@@ -4,12 +4,6 @@
 
 package hangul
 
-/*  Filename:    hangul_test.go
- *  Author:      Homin Lee <homin.lee@suapapa.net>
- *  Created:     2012-07-16 17:16:58.048792 +0900 KST
- *  Description: Main test file for hangul
- */
-
 import "testing"
 
 func TestIdx(t *testing.T) {
@@ -40,16 +34,16 @@ func TestStroke(t *testing.T) {
 }
 
 func TestJoin(t *testing.T) {
-	if c := Join(LEAD_S, MEDIAL_EO, 0); c != 0xC11C {
+	if c := Join(LeadS, MedialEO, 0); c != 0xC11C {
 		t.Errorf("Got %c(%v), expect %c(%v)", c, c, 0xC11C, 0xC11C) // 서
 	}
-	if c := Join(LEAD_ZS, MEDIAL_U, TAIL_L); c != 0xC6B8 {
+	if c := Join(LeadZS, MedialU, TailL); c != 0xC6B8 {
 		t.Errorf("Got %c, expect %c", c, 0xC6B8) // 울
 	}
-	if c := Join(LEAD_P, MEDIAL_YEO, TAIL_NG); c != 0xD3C9 {
+	if c := Join(LeadP, MedialYEO, TailNG); c != 0xD3C9 {
 		t.Errorf("Got %c, expect %c", c, 0xD3C9) // 평
 	}
-	if c := Join(LEAD_ZS, MEDIAL_YA, TAIL_NG); c != 0xC591 {
+	if c := Join(LeadZS, MedialYA, TailNG); c != 0xC591 {
 		t.Errorf("Got %c, expect %c", c, 0xC11C) // 양
 	}
 }
@@ -106,19 +100,19 @@ func TestMultiElements(t *testing.T) {
 }
 
 func TestComaptJamo(t *testing.T) {
-	if c := CompatJamo(LEAD_G); c != G {
+	if c := CompatJamo(LeadG); c != G {
 		t.Errorf("Failed to convert to comaptibility jamo! ")
 		t.Errorf("expected %v but, got %v\n", G, c)
 	}
-	if c := CompatJamo(TAIL_H); c != H {
+	if c := CompatJamo(TailH); c != H {
 		t.Errorf("Failed to convert to comaptibility jamo! ")
 		t.Errorf("expected %v but, got %v\n", H, c)
 	}
-	if c := CompatJamo(MEDIAL_A); c != A {
+	if c := CompatJamo(MedialA); c != A {
 		t.Errorf("Failed to convert to comaptibility jamo! ")
 		t.Errorf("expected %v but, got %v\n", A, c)
 	}
-	if c := CompatJamo(MEDIAL_I); c != I {
+	if c := CompatJamo(MedialI); c != I {
 		t.Errorf("Failed to convert to comaptibility jamo! ")
 		t.Errorf("expected %v but, got %v\n", I, c)
 	}
@@ -135,19 +129,19 @@ func TestJamoConstants(t *testing.T) {
 			" not 0x%04x\n", I)
 	}
 
-	if LEAD_H != 0x1112 {
+	if LeadH != 0x1112 {
 		t.Errorf("Last Lead sholud be 0x1112."+
-			" not 0x%04x\n", LEAD_H)
+			" not 0x%04x\n", LeadH)
 	}
 
-	if MEDIAL_I != 0x1175 {
+	if MedialI != 0x1175 {
 		t.Errorf("Last Medial sholud be 0x1175."+
-			" not 0x%04x\n", MEDIAL_I)
+			" not 0x%04x\n", MedialI)
 	}
 
-	if TAIL_H != 0x11C2 {
+	if TailH != 0x11C2 {
 		t.Errorf("Last Tail sholud be 0x11C3."+
-			" not 0x%04x\n", TAIL_H)
+			" not 0x%04x\n", TailH)
 	}
 }
 
@@ -175,8 +169,8 @@ func TestLastConsonant(t *testing.T) {
 		endsWith rune
 	}{
 		{"", 0},
-		{"강", TAIL_NG},
-		{"그날맑", TAIL_LG},
+		{"강", TailNG},
+		{"그날맑", TailLG},
 		{"이", 0},
 		{"물고기", 0},
 	}
