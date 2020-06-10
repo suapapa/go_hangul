@@ -1,3 +1,3 @@
-module github.com/suapapa/go_hangul
+module github.com/suapapa/go/hangul
 
 go 1.14
